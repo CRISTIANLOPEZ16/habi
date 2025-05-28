@@ -1,0 +1,5 @@
+/query/.python-version
+query/.venv
+/query/.mypy_cache
+/query/.pytest_cache
+/query/.env

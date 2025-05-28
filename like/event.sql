@@ -1,0 +1,14 @@
+USE `habi_db`;
+
+
+CREATE TABLE event (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(150),
+    json_event_data JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    user_id INT,
+    property_id INT,
+    FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (property_id) REFERENCES property(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
