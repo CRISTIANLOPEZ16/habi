@@ -3,3 +3,4 @@ query/.venv
 /query/.mypy_cache
 /query/.pytest_cache
 /query/.env
+**/__pycache__/

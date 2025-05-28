@@ -11,8 +11,9 @@ class PropertyRepository:
                         FROM status_history
                         GROUP BY property_id
                     ) AS last_sh ON last_sh.property_id = p.id
-                    JOIN status_history sh ON sh.id = last_sh.last_status_id
-                    JOIN status s ON sh.status_id = s.id WHERE sh.status_id IN (3, 4, 5)"""
+                    JOIN status_history sh ON sh.id = last_sh.last_status_id AND sh.status_id IN (3, 4, 5)
+                    JOIN status s ON sh.status_id = s.id WHERE 1=1
+                    """
             params = []
             if "year" in filters and filters["year"]:
                 query += " AND p.year = %s"
@@ -20,7 +21,11 @@ class PropertyRepository:
             if "city" in filters and filters["city"]:
                 query += " AND p.city = %s"
                 params.append(filters["city"])
+            if "status" in filters and filters["status"]:
+                query += " AND s.name = %s"
+                params.append(filters["status"])
             # Puedes agregar más filtros según se requiera
+            print(f"Ejecutando consulta: {query} con parámetros: {params}")
             cursor.execute(query, params)
             return cursor.fetchall()
         except Exception as e:

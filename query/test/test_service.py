@@ -100,6 +100,41 @@ class DummyRepo:
                         "status": "pre_venta"
                     }
             ]
+        elif filters.get("status") == "en_venta":
+            return [
+                    {
+                        "address": "carrera 100 #15-90",
+                        "city": "bogota",
+                        "price": 350000000,
+                        "description": "Amplio apartamento en conjunto cerrado",
+                        "year": 2011,
+                        "status": "en_venta"
+                    },
+                    {
+                        "address": "diagonal 23 #28-21",
+                        "city": "bogota",
+                        "price": 270000000,
+                        "description": "Apartamento con hermosas vistas",
+                        "year": 2018,
+                        "status": "en_venta"
+                    },
+                    {
+                        "address": "carrera 100 #15-90",
+                        "city": "medellin",
+                        "price": 325000000,
+                        "description": "Amplio apartamento en conjunto cerrado",
+                        "year": 2011,
+                        "status": "en_venta"
+                    },
+                    {
+                        "address": "diagonal 23 #28-21",
+                        "city": "medellin",
+                        "price": 270000000,
+                        "description": "",
+                        "year": "null",
+                        "status": "en_venta"
+                    }
+            ]
         else:
             return [
                     {
@@ -654,6 +689,11 @@ def test_consulta_sin_filtros():
     assert len(result) > 0
     for prop in result:
         assert prop["status"] in ["en_venta", "pre_venta", "vendido"]
+
+def test_consulta_con_filtro_status():
+    result = consultar_propiedades({"status": "en_venta"}, repo=DummyRepo())
+    assert len(result) > 0
+    assert all(prop["status"].lower() == "en_venta" for prop in result)
 
 def test_consulta_con_filtros_city_year():
     result = consultar_propiedades({"city": "Bogotá", "year": 2020}, repo=DummyRepo())
