@@ -55,3 +55,8 @@ Tome la desicion de optar por una tabla multifuncional donde se pudiera registra
 ## Notas
 
 - Las credenciales de la base de datos deben configurarse en `query/.env`. ya que utilizo python-dotenv para cargar las variables de entorno.
+
+
+## Proponer un modelo de base de datos diferente para el ejercicio
+
+Para este ejercicio, de inmuebles, el historico no lo manejaria como una relacion muchos a muchos, solo almacenaria un atributo estado en la tabla de property y el historico lo manejaria en una tabla independiente con un json para almacenar la mayor cantidad de informacion posible algo similar a lo que hice con la tabla event, sin embargo tambien se podria tener un sistema de logs en tablas NoSQL para almacenar dicho historico, ya que al cliente final no es necesario mostrarle el historico de cambio de estado, del inmueble, solo el ultimo estado.
